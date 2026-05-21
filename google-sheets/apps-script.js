@@ -6,8 +6,39 @@ function jsonResponse(data) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-function doGet() {
-  return jsonResponse({ ok: true, service: 'TradeFind AI Google Sheets Backend' });
+function rowsToObjects(values) {
+  if (!values || values.length < 2) return [];
+  const headers = values[0];
+  return values.slice(1).filter(row => row.some(Boolean)).map(row => {
+    const item = {};
+    headers.forEach((header, index) => item[header] = row[index] || '');
+    return item;
+  });
+}
+
+function doGet(e) {
+  try {
+    const action = e && e.parameter && e.parameter.action;
+    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+
+    if (action === 'leads') {
+      const sheet = spreadsheet.getSheetByName('Leads');
+      const values = sheet.getDataRange().getValues();
+      const leads = rowsToObjects(values).reverse().slice(0, 100);
+      return jsonResponse({ ok: true, action: 'leads_listed', leads: leads });
+    }
+
+    if (action === 'clicks') {
+      const sheet = spreadsheet.getSheetByName('Clicks');
+      const values = sheet.getDataRange().getValues();
+      const clicks = rowsToObjects(values).reverse().slice(0, 100);
+      return jsonResponse({ ok: true, action: 'clicks_listed', clicks: clicks });
+    }
+
+    return jsonResponse({ ok: true, service: 'TradeFind AI Google Sheets Backend' });
+  } catch (error) {
+    return jsonResponse({ ok: false, error: String(error) });
+  }
 }
 
 function doPost(e) {
