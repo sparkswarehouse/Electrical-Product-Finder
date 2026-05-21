@@ -58,6 +58,13 @@ function App() {
     setQuote(prev => prev.find(x=>x.id===p.id) ? prev : [...prev,p]);
   }
 
+  function handleSearch(event) {
+    if (event) event.preventDefault();
+    const nextQuery = searchInput.trim();
+    setSelected(null);
+    setQuery(nextQuery);
+  }
+
   return <div>
     <header className="hero">
       <nav>
@@ -68,13 +75,18 @@ function App() {
         <p className="eyebrow">AI Electrical Product Finder MVP</p>
         <h1>Find, match and compare electrical products in seconds.</h1>
         <p className="lead">Natural-language product search, alternatives, TSI/item matching, supplier comparison and quote building — ready for live Luckins/API credentials later.</p>
-        <div className="searchBox">
-          <Search/>
-          <input value={searchInput} onChange={e=>setSearchInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter") setQuery(searchInput)}} placeholder="Try: alternative to MK socket, 13A black socket, 50mm cable..." />
-          <button onClick={()=>setQuery(searchInput)}>Search</button>
-        </div>
+        <form className="searchBox" onSubmit={handleSearch}>
+          <Search className="searchIcon" aria-hidden="true"/>
+          <input
+            value={searchInput}
+            onChange={e=>setSearchInput(e.target.value)}
+            placeholder="Try: alternative to MK socket, 13A black socket, 50mm cable..."
+            aria-label="Search electrical products"
+          />
+          <button type="submit">Search</button>
+        </form>
         <div className="examples">
-          {["black socket USB","tri-rated cable 50mm","compare emergency lighting","MK switch"].map(x=><button key={x} onClick={()=>{setSearchInput(x); setQuery(x)}}>{x}</button>)}
+          {["black socket USB","tri-rated cable 50mm","compare emergency lighting","MK switch"].map(x=><button type="button" key={x} onClick={()=>{setSearchInput(x); setSelected(null); setQuery(x)}}>{x}</button>)}
         </div>
       </section>
       <div className="stats">
@@ -102,8 +114,9 @@ function App() {
       </aside>
 
       <section className="results">
-        <div className="sectionHead"><h2>Best matches</h2><span>{results.length} products</span></div>
+        <div className="sectionHead"><h2>Best matches</h2><span>{results.length} products for “{query || "all products"}”</span></div>
         <div className="grid">
+          {results.length === 0 && <div className="emptyState"><h3>No exact matches found</h3><p>Try a broader product term such as “socket”, “cable”, “MK”, or “emergency lighting”.</p></div>}
           {results.slice(0,12).map(p=><ProductCard key={`${p.id}-${p.catalogueNumber}`} product={p} selected={active?.id===p.id} onSelect={setSelected} onQuote={addQuote}/>)}
         </div>
       </section>
