@@ -1,50 +1,46 @@
-import { getSupabase } from './_supabase.js';
-
 export default async function handler(req, res) {
-  const supabase = getSupabase();
+  const sheetsUrl = process.env.GOOGLE_SHEETS_WEB_APP_URL;
 
   if (req.method === 'GET') {
-    if (!supabase) {
-      return res.status(200).json({ ok: true, source: 'fallback-json', leads: [] });
-    }
-
-    const { data, error } = await supabase
-      .from('quote_leads')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(100);
-
-    if (error) {
-      return res.status(500).json({ ok: false, error: error.message });
-    }
-
-    return res.status(200).json({ ok: true, source: 'supabase', leads: data });
+    return res.status(200).json({
+      ok: true,
+      source: sheetsUrl ? 'google-sheets-configured' : 'google-sheets-not-configured',
+      leads: []
+    });
   }
 
   if (req.method === 'POST') {
     const payload = req.body || {};
 
-    if (!supabase) {
+    if (!sheetsUrl) {
       console.log('Lead fallback payload', payload);
-      return res.status(200).json({ ok: true, source: 'fallback-console' });
+      return res.status(200).json({ ok: true, source: 'fallback-console-no-google-sheets-url' });
     }
 
-    const { error } = await supabase.from('quote_leads').insert({
-      name: payload.name,
-      company: payload.company,
-      email: payload.email,
-      phone: payload.phone,
-      postcode: payload.postcode,
-      required_by: payload.requiredBy,
-      message: payload.message,
-      products: payload.products || []
-    });
+    try {
+      const response = await fetch(sheetsUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'lead', ...payload })
+      });
 
-    if (error) {
-      return res.status(500).json({ ok: false, error: error.message });
+      const text = await response.text();
+      let data;
+      try { data = JSON.parse(text); } catch { data = { raw: text }; }
+
+      return res.status(200).json({
+        ok: true,
+        source: 'google-sheets',
+        sheetsResponse: data
+      });
+    } catch (error) {
+      console.error('Google Sheets lead submit failed', error);
+      return res.status(200).json({
+        ok: true,
+        source: 'fallback-after-google-sheets-error',
+        warning: error.message
+      });
     }
-
-    return res.status(200).json({ ok: true, source: 'supabase' });
   }
 
   res.setHeader('Allow', ['GET', 'POST']);
