@@ -1,12 +1,93 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Electrical Product Finder</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Electrical Product Finder</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: #f4f7fb; color: #0f172a; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 24px; }
+    .hero { background: #0f172a; color: white; border-radius: 26px; padding: 42px; box-shadow: 0 18px 50px rgba(15,23,42,.18); }
+    h1 { font-size: 44px; margin: 0 0 10px; letter-spacing: -1px; }
+    .hero p { font-size: 18px; opacity: .9; margin: 0; }
+    .search { display: flex; gap: 12px; margin-top: 26px; }
+    input { flex: 1; padding: 16px; border: 0; border-radius: 12px; font-size: 16px; }
+    button { padding: 14px 20px; border-radius: 12px; border: 0; font-weight: 700; cursor: pointer; background: #38bdf8; color: #082f49; }
+    .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .chip { background: rgba(255,255,255,.12); color: white; border: 1px solid rgba(255,255,255,.18); padding: 9px 12px; border-radius: 999px; cursor: pointer; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 16px; margin-top: 22px; }
+    .card { background: white; border-radius: 18px; padding: 20px; box-shadow: 0 10px 25px rgba(15,23,42,.08); }
+    .brand { color: #64748b; font-size: 13px; font-weight: 800; text-transform: uppercase; }
+    h3 { margin: 10px 0; }
+    .meta { color: #475569; }
+    .status { margin-top: 22px; font-weight: 700; }
+    .bar { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .panel { background: white; border-radius: 18px; padding: 20px; margin-top: 20px; box-shadow: 0 10px 25px rgba(15,23,42,.08); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>AI Electrical Product Finder</h1>
+      <p>Search electrical products, find alternatives and compare trade suppliers.</p>
+      <div class="search">
+        <input id="q" placeholder="Try: MK socket, emergency lighting, tri-rated cable" />
+        <button id="searchBtn">Search</button>
+      </div>
+      <div class="chips">
+        <span class="chip">MK socket</span>
+        <span class="chip">emergency lighting</span>
+        <span class="chip">tri-rated cable</span>
+        <span class="chip">bathroom fan</span>
+      </div>
+    </section>
+
+    <div class="panel">
+      <h2>Featured product matches</h2>
+      <div id="status" class="status">Showing demo products.</div>
+      <div id="results" class="grid"></div>
+    </div>
+  </main>
+
+  <script>
+    const products = [
+      { brand: 'MK Electric', name: 'Logic Plus 13A Double Switched Socket', category: 'Wiring Devices', code: 'K2747WHI', price: '£4.22' },
+      { brand: 'Cooper Lighting', name: 'Emergency LED Bulkhead', category: 'Emergency Lighting', code: 'ELBLED3', price: '£18.95' },
+      { brand: 'Cables Generic', name: 'Tri-rated Cable 50mm Blue', category: 'Cable', code: 'TRI50BLU', price: '£2.80/m' },
+      { brand: 'Polypipe Ventilation', name: 'Bathroom Extract Fan 100mm', category: 'Ventilation', code: 'PV100EF', price: '£22.50' }
+    ];
+
+    const results = document.getElementById('results');
+    const status = document.getElementById('status');
+    const q = document.getElementById('q');
+
+    function render(list) {
+      results.innerHTML = list.map(p => `
+        <article class="card">
+          <div class="brand">${p.brand}</div>
+          <h3>${p.name}</h3>
+          <p class="meta">${p.category}</p>
+          <p><strong>Code:</strong> ${p.code}</p>
+          <p><strong>Trade price:</strong> ${p.price}</p>
+          <button onclick="alert('Alternative finder demo: this will connect to Luckins/live supplier data next.')">Find alternatives</button>
+        </article>
+      `).join('');
+    }
+
+    function doSearch() {
+      const term = q.value.toLowerCase().trim();
+      const filtered = !term ? products : products.filter(p =>
+        [p.brand, p.name, p.category, p.code].join(' ').toLowerCase().includes(term)
+      );
+      status.textContent = filtered.length ? `Showing ${filtered.length} match(es).` : 'No exact demo match yet. Full AI semantic search is the next upgrade.';
+      render(filtered);
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', doSearch);
+    q.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+    document.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => { q.value = chip.textContent; doSearch(); }));
+    render(products);
+  </script>
+</body>
 </html>
