@@ -1,0 +1,42 @@
+{
+  "purpose": "Template for supplier product links used by TradeFind AI.",
+  "rule": "Do not label a link as an exact product link unless the URL points to the verified product page on the supplier website.",
+  "fields": {
+    "supplier": "Supplier display name, e.g. TLC Direct",
+    "price": "Observed or supplied price. Use 'Check site' or 'Login / trade price' if unknown.",
+    "stock": "Observed or supplied stock status. Use 'Check supplier site' if unknown.",
+    "url": "Supplier URL. Prefer exact product-page URL where available.",
+    "urlType": "exact-product | supplier-search | supplier-homepage",
+    "confidence": "High | Medium | Low",
+    "lastChecked": "YYYY-MM-DD"
+  },
+  "examples": [
+    {
+      "supplier": "TLC Direct",
+      "price": "£4.22",
+      "stock": "In stock",
+      "url": "https://www.tlc-direct.co.uk/Products/MKK2747WHI.html",
+      "urlType": "exact-product",
+      "confidence": "High",
+      "lastChecked": "2026-05-21"
+    },
+    {
+      "supplier": "CEF",
+      "price": "Login / trade price",
+      "stock": "Check supplier site",
+      "url": "https://www.cef.co.uk/search?q=K2747WHI",
+      "urlType": "supplier-search",
+      "confidence": "Medium",
+      "lastChecked": "2026-05-21"
+    },
+    {
+      "supplier": "Rexel UK",
+      "price": "Login / trade price",
+      "stock": "Check supplier site",
+      "url": "https://www.rexel.co.uk/",
+      "urlType": "supplier-homepage",
+      "confidence": "Low",
+      "lastChecked": "2026-05-21"
+    }
+  ]
+}
