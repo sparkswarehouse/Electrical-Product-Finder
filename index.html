@@ -5,89 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Electrical Product Finder</title>
   <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Arial, sans-serif; background: #f4f7fb; color: #0f172a; }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 24px; }
-    .hero { background: #0f172a; color: white; border-radius: 26px; padding: 42px; box-shadow: 0 18px 50px rgba(15,23,42,.18); }
-    h1 { font-size: 44px; margin: 0 0 10px; letter-spacing: -1px; }
-    .hero p { font-size: 18px; opacity: .9; margin: 0; }
-    .search { display: flex; gap: 12px; margin-top: 26px; }
-    input { flex: 1; padding: 16px; border: 0; border-radius: 12px; font-size: 16px; }
-    button { padding: 14px 20px; border-radius: 12px; border: 0; font-weight: 700; cursor: pointer; background: #38bdf8; color: #082f49; }
-    .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-    .chip { background: rgba(255,255,255,.12); color: white; border: 1px solid rgba(255,255,255,.18); padding: 9px 12px; border-radius: 999px; cursor: pointer; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 16px; margin-top: 22px; }
-    .card { background: white; border-radius: 18px; padding: 20px; box-shadow: 0 10px 25px rgba(15,23,42,.08); }
-    .brand { color: #64748b; font-size: 13px; font-weight: 800; text-transform: uppercase; }
-    h3 { margin: 10px 0; }
-    .meta { color: #475569; }
-    .status { margin-top: 22px; font-weight: 700; }
-    .bar { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-    .panel { background: white; border-radius: 18px; padding: 20px; margin-top: 20px; box-shadow: 0 10px 25px rgba(15,23,42,.08); }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(135deg,#eef5ff 0%,#f8fafc 45%,#eef2ff 100%);color:#0f172a} .app{max-width:1240px;margin:0 auto;padding:28px}.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.logo{display:flex;align-items:center;gap:12px;font-weight:900}.mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#2563eb,#38bdf8);display:grid;place-items:center;color:white}.pill{background:white;border:1px solid #e2e8f0;border-radius:999px;padding:10px 14px;color:#475569;font-size:14px}.hero{background:radial-gradient(circle at top right,#2563eb 0,#0f172a 45%,#020617 100%);color:white;border-radius:32px;padding:46px;box-shadow:0 30px 90px rgba(15,23,42,.24);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;background:rgba(56,189,248,.18)}.kicker{color:#7dd3fc;text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800}h1{font-size:54px;line-height:1;margin:14px 0 14px;max-width:800px;letter-spacing:-2px}.sub{font-size:19px;color:#cbd5e1;max-width:760px;line-height:1.55}.searchbox{display:flex;gap:12px;margin-top:30px;background:white;padding:10px;border-radius:20px;max-width:850px;position:relative;z-index:1}input{flex:1;border:0;outline:0;padding:18px;font-size:16px;border-radius:14px}button{border:0;border-radius:14px;padding:14px 20px;font-weight:900;cursor:pointer}.primary{background:#38bdf8;color:#082f49}.secondary{background:#eef2ff;color:#1e3a8a}.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;position:relative;z-index:1}.chip{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);color:white;padding:10px 13px;border-radius:999px;cursor:pointer;font-size:14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}.stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px}.stat strong{display:block;font-size:22px}.layout{display:grid;grid-template-columns:260px 1fr;gap:20px;margin-top:24px}.panel,.card{background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border:1px solid #e2e8f0;border-radius:24px;box-shadow:0 14px 40px rgba(15,23,42,.08)}.panel{padding:20px}.filter{display:block;margin:12px 0;padding:12px;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;color:#475569}.topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.card{padding:20px}.brand{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#2563eb;font-weight:900}.card h3{font-size:20px;margin:10px 0}.meta{color:#64748b;line-height:1.45}.tags{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tag{font-size:12px;padding:7px 9px;background:#eff6ff;color:#1d4ed8;border-radius:999px}.price{font-size:22px;font-weight:900}.actions{display:flex;gap:10px;margin-top:14px}.actions button{flex:1}.compare{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.supplier{padding:16px;border-radius:18px;background:#f8fafc;border:1px solid #e2e8f0}.supplier strong{display:block}.quote{position:fixed;right:22px;bottom:22px;background:#0f172a;color:white;border-radius:20px;padding:16px 18px;box-shadow:0 20px 60px rgba(15,23,42,.25)}@media(max-width:850px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}h1{font-size:40px}.searchbox{flex-direction:column}}
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <h1>AI Electrical Product Finder</h1>
-      <p>Search electrical products, find alternatives and compare trade suppliers.</p>
-      <div class="search">
-        <input id="q" placeholder="Try: MK socket, emergency lighting, tri-rated cable" />
-        <button id="searchBtn">Search</button>
-      </div>
-      <div class="chips">
-        <span class="chip">MK socket</span>
-        <span class="chip">emergency lighting</span>
-        <span class="chip">tri-rated cable</span>
-        <span class="chip">bathroom fan</span>
-      </div>
-    </section>
-
-    <div class="panel">
-      <h2>Featured product matches</h2>
-      <div id="status" class="status">Showing demo products.</div>
-      <div id="results" class="grid"></div>
-    </div>
+  <main class="app">
+    <nav class="nav"><div class="logo"><div class="mark">⚡</div><div>TradeFind AI<br><span style="color:#64748b;font-weight:600;font-size:13px">Electrical product intelligence</span></div></div><div class="pill">Demo MVP · Luckins-ready</div></nav>
+    <section class="hero"><div class="kicker">AI-powered electrical search</div><h1>Find any electrical product in seconds.</h1><p class="sub">Search by description, brand, category, catalogue number or trade intent. Built to become an alternatives finder, supplier comparison tool and procurement engine.</p><div class="searchbox"><input id="q" placeholder="Ask: find me a black nickel USB socket, emergency bulkhead, or tri-rated cable"><button class="primary" id="searchBtn">Search Products</button></div><div class="chips"><span class="chip">MK socket</span><span class="chip">emergency lighting</span><span class="chip">tri-rated cable</span><span class="chip">bathroom fan</span><span class="chip">USB socket</span></div><div class="stats"><div class="stat"><strong>AI Search</strong>Natural language</div><div class="stat"><strong>Alternatives</strong>Replacement finder</div><div class="stat"><strong>Suppliers</strong>Price comparison</div><div class="stat"><strong>Quotes</strong>Trade basket</div></div></section>
+    <section class="layout"><aside class="panel"><h3>Filters</h3><span class="filter">Brand</span><span class="filter">Product Category</span><span class="filter">Supplier</span><span class="filter">IP Rating</span><span class="filter">Voltage / Wattage</span><span class="filter">Stock Status</span><h3 style="margin-top:24px">AI tools</h3><span class="filter">Find Alternative</span><span class="filter">Compare Suppliers</span><span class="filter">Build Quote</span><span class="filter">Obsolete Replacement</span></aside><section><div class="panel"><div class="topline"><div><h2 style="margin:0">Product matches</h2><p id="status" class="meta" style="margin:6px 0 0">Showing demo products.</p></div><button class="secondary">Export Quote</button></div><div id="results" class="grid"></div></div><div class="panel"><h2>Supplier comparison preview</h2><div class="compare"><div class="supplier"><strong>Supplier A</strong>£4.22 · In stock · Next day</div><div class="supplier"><strong>Supplier B</strong>£4.48 · 32 available · 2 days</div><div class="supplier"><strong>Supplier C</strong>£4.10 · Trade account required</div></div></div></section></section>
+    <div class="quote">Quote basket: <strong id="basket">0</strong> items</div>
   </main>
-
-  <script>
-    const products = [
-      { brand: 'MK Electric', name: 'Logic Plus 13A Double Switched Socket', category: 'Wiring Devices', code: 'K2747WHI', price: '£4.22' },
-      { brand: 'Cooper Lighting', name: 'Emergency LED Bulkhead', category: 'Emergency Lighting', code: 'ELBLED3', price: '£18.95' },
-      { brand: 'Cables Generic', name: 'Tri-rated Cable 50mm Blue', category: 'Cable', code: 'TRI50BLU', price: '£2.80/m' },
-      { brand: 'Polypipe Ventilation', name: 'Bathroom Extract Fan 100mm', category: 'Ventilation', code: 'PV100EF', price: '£22.50' }
-    ];
-
-    const results = document.getElementById('results');
-    const status = document.getElementById('status');
-    const q = document.getElementById('q');
-
-    function render(list) {
-      results.innerHTML = list.map(p => `
-        <article class="card">
-          <div class="brand">${p.brand}</div>
-          <h3>${p.name}</h3>
-          <p class="meta">${p.category}</p>
-          <p><strong>Code:</strong> ${p.code}</p>
-          <p><strong>Trade price:</strong> ${p.price}</p>
-          <button onclick="alert('Alternative finder demo: this will connect to Luckins/live supplier data next.')">Find alternatives</button>
-        </article>
-      `).join('');
-    }
-
-    function doSearch() {
-      const term = q.value.toLowerCase().trim();
-      const filtered = !term ? products : products.filter(p =>
-        [p.brand, p.name, p.category, p.code].join(' ').toLowerCase().includes(term)
-      );
-      status.textContent = filtered.length ? `Showing ${filtered.length} match(es).` : 'No exact demo match yet. Full AI semantic search is the next upgrade.';
-      render(filtered);
-    }
-
-    document.getElementById('searchBtn').addEventListener('click', doSearch);
-    q.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
-    document.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', () => { q.value = chip.textContent; doSearch(); }));
-    render(products);
-  </script>
+<script>
+const products=[{brand:'MK Electric',name:'Logic Plus 13A Double Switched Socket',category:'Wiring Devices',code:'K2747WHI',price:'£4.22',tags:['13A','White','Switched']},{brand:'Cooper Lighting',name:'Emergency LED Bulkhead',category:'Emergency Lighting',code:'ELBLED3',price:'£18.95',tags:['LED','Emergency','Bulkhead']},{brand:'Cables Generic',name:'Tri-rated Cable 50mm Blue',category:'Cable',code:'TRI50BLU',price:'£2.80/m',tags:['50mm','Blue','Panel wire']},{brand:'Polypipe Ventilation',name:'Bathroom Extract Fan 100mm',category:'Ventilation',code:'PV100EF',price:'£22.50',tags:['100mm','Bathroom','Extractor']},{brand:'Generic Wiring',name:'Black Nickel USB Double Socket',category:'Wiring Devices',code:'USB2GBN',price:'£12.95',tags:['USB','Black nickel','Decorative']}];
+let basket=0;const results=document.getElementById('results'),status=document.getElementById('status'),q=document.getElementById('q');
+function card(p){return `<article class="card"><div class="brand">${p.brand}</div><h3>${p.name}</h3><p class="meta">${p.category}</p><p><strong>Code:</strong> ${p.code}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><div class="price">${p.price}</div><div class="actions"><button class="secondary" onclick="alert('Alternative finder: connect Luckins cross-reference data next.')">Alternatives</button><button class="primary" onclick="basket++;document.getElementById('basket').textContent=basket">Add</button></div></article>`}
+function render(list){results.innerHTML=list.map(card).join('')}
+function doSearch(){const term=q.value.toLowerCase().trim();const list=!term?products:products.filter(p=>[p.brand,p.name,p.category,p.code,...p.tags].join(' ').toLowerCase().includes(term));status.textContent=list.length?`Showing ${list.length} match(es) for "${term||'all products'}".`:'No exact demo match yet. Full semantic AI search is the next upgrade.';render(list)}
+document.getElementById('searchBtn').addEventListener('click',doSearch);q.addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{q.value=c.textContent;doSearch()}));render(products);
+</script>
 </body>
 </html>
