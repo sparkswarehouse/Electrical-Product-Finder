@@ -13,8 +13,7 @@ export default async function handler(req, res) {
     const payload = req.body || {};
 
     if (!sheetsUrl) {
-      console.log('Lead fallback payload', payload);
-      return res.status(200).json({ ok: true, source: 'fallback-console-no-google-sheets-url' });
+      return res.status(503).json({ ok: false, source: 'google-sheets-not-configured', error: 'GOOGLE_SHEETS_WEB_APP_URL is missing in Vercel.' });
     }
 
     try {
@@ -28,17 +27,25 @@ export default async function handler(req, res) {
       let data;
       try { data = JSON.parse(text); } catch { data = { raw: text }; }
 
+      if (!response.ok || data.ok !== true || data.action !== 'lead_saved') {
+        return res.status(502).json({
+          ok: false,
+          source: 'google-sheets-error',
+          error: data.error || data.raw || 'Google Sheets did not confirm lead_saved.',
+          sheetsResponse: data
+        });
+      }
+
       return res.status(200).json({
         ok: true,
         source: 'google-sheets',
         sheetsResponse: data
       });
     } catch (error) {
-      console.error('Google Sheets lead submit failed', error);
-      return res.status(200).json({
-        ok: true,
-        source: 'fallback-after-google-sheets-error',
-        warning: error.message
+      return res.status(502).json({
+        ok: false,
+        source: 'google-sheets-request-failed',
+        error: error.message
       });
     }
   }
