@@ -1,0 +1,67 @@
+[
+  {
+    "brand": "Generic Wiring",
+    "name": "Black Nickel USB Double Socket",
+    "category": "Wiring Devices",
+    "code": "USB2GBN",
+    "price": "£12.95",
+    "tags": ["USB", "Black nickel", "Decorative"],
+    "icon": "socket",
+    "rating": "13A",
+    "voltage": "250V",
+    "range": "Decorative wiring",
+    "desc": "Decorative twin switched socket with integrated USB charging, suited to residential and light commercial interior projects."
+  },
+  {
+    "brand": "MK Electric",
+    "name": "Logic Plus 13A Double Switched Socket",
+    "category": "Wiring Devices",
+    "code": "K2747WHI",
+    "price": "£4.22",
+    "tags": ["13A", "White", "Switched"],
+    "icon": "socket",
+    "rating": "13A",
+    "voltage": "250V",
+    "range": "Logic Plus",
+    "desc": "High-volume white moulded twin switched socket. Commonly used by contractors for everyday installations."
+  },
+  {
+    "brand": "Cooper Lighting",
+    "name": "Emergency LED Bulkhead",
+    "category": "Emergency Lighting",
+    "code": "ELBLED3",
+    "price": "£18.95",
+    "tags": ["LED", "Emergency", "Bulkhead"],
+    "icon": "bulkhead",
+    "rating": "3 hour emergency",
+    "voltage": "230V",
+    "range": "Emergency lighting",
+    "desc": "LED emergency bulkhead for corridors, stairwells and commercial escape routes."
+  },
+  {
+    "brand": "Cables Generic",
+    "name": "Tri-rated Cable 50mm Blue",
+    "category": "Cable",
+    "code": "TRI50BLU",
+    "price": "£2.80/m",
+    "tags": ["50mm", "Blue", "Panel wire"],
+    "icon": "cable",
+    "rating": "50mm²",
+    "voltage": "600/1000V",
+    "range": "Panel cable",
+    "desc": "Flexible tri-rated panel wire for control panels, switchgear and industrial wiring applications."
+  },
+  {
+    "brand": "Polypipe Ventilation",
+    "name": "Bathroom Extract Fan 100mm",
+    "category": "Ventilation",
+    "code": "PV100EF",
+    "price": "£22.50",
+    "tags": ["100mm", "Bathroom", "Extractor"],
+    "icon": "fan",
+    "rating": "100mm",
+    "voltage": "230V",
+    "range": "Domestic ventilation",
+    "desc": "Compact domestic extractor fan for bathroom and toilet ventilation applications."
+  }
+]
