@@ -5,21 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TradeFind AI | Owner Admin</title>
   <style>
-    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f8fafc;color:#0f172a}.wrap{max-width:1240px;margin:0 auto;padding:32px}.top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:24px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:#2563eb;font-weight:900}.title{font-size:42px;line-height:1.05;margin:8px 0}.muted{color:#64748b;line-height:1.5}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}.primary{background:#0f172a;color:white}.secondary{background:#eef2ff;color:#1e3a8a}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}.card,.panel{background:white;border:1px solid #e2e8f0;border-radius:24px;box-shadow:0 14px 40px rgba(15,23,42,.06)}.card{padding:18px}.card strong{display:block;font-size:28px;margin-bottom:4px}.panel{padding:22px;margin-top:18px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.chip{border:1px solid #e2e8f0;background:white;border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:800;color:#475569}.chip.active{background:#0f172a;color:white}.supplier{display:grid;grid-template-columns:1.4fr .8fr .8fr .8fr 1fr;gap:12px;align-items:center;padding:16px;border:1px solid #e2e8f0;border-radius:18px;background:#fff;margin:10px 0}.supplier h3{margin:0}.badge{display:inline-block;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}.listed{background:#dbeafe;color:#1d4ed8}.onboarded{background:#dcfce7;color:#166534}.prospect{background:#fef3c7;color:#92400e}.standard{background:#f1f5f9;color:#334155}.sponsored{background:#fae8ff;color:#86198f}.not_connected{background:#fee2e2;color:#991b1b}.connected{background:#dcfce7;color:#166534}.pending{background:#fef3c7;color:#92400e}.field{width:100%;border:1px solid #e2e8f0;border-radius:14px;padding:12px;font:inherit}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.small{font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap}.note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:14px}.tablehead{display:grid;grid-template-columns:1.4fr .8fr .8fr .8fr 1fr;gap:12px;color:#64748b;font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;padding:0 16px 8px}@media(max-width:900px){.cards,.grid2{grid-template-columns:1fr 1fr}.supplier,.tablehead{grid-template-columns:1fr}.top{flex-direction:column;align-items:flex-start}}@media(max-width:600px){.cards{grid-template-columns:1fr}.wrap{padding:20px}.title{font-size:34px}}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f8fafc;color:#0f172a}.wrap{max-width:1240px;margin:0 auto;padding:32px}.top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:24px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:#2563eb;font-weight:900}.title{font-size:42px;line-height:1.05;margin:8px 0}.muted{color:#64748b;line-height:1.5}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}.primary{background:#0f172a;color:white}.secondary{background:#eef2ff;color:#1e3a8a}.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:22px 0}.card,.panel{background:white;border:1px solid #e2e8f0;border-radius:24px;box-shadow:0 14px 40px rgba(15,23,42,.06)}.card{padding:18px}.card strong{display:block;font-size:28px;margin-bottom:4px}.panel{padding:22px;margin-top:18px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.chip{border:1px solid #e2e8f0;background:white;border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:800;color:#475569}.chip.active{background:#0f172a;color:white}.supplier{display:grid;grid-template-columns:1.4fr .8fr .8fr .8fr 1fr;gap:12px;align-items:center;padding:16px;border:1px solid #e2e8f0;border-radius:18px;background:#fff;margin:10px 0}.lead{padding:18px;border:1px solid #e2e8f0;border-radius:18px;background:#fff;margin:12px 0}.leadtop{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.lead h3,.supplier h3{margin:0}.leadgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}.leadfield{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:10px}.leadfield small{display:block;color:#64748b;text-transform:uppercase;font-weight:900;font-size:10px}.products{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px;margin-top:10px}.badge{display:inline-block;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}.listed{background:#dbeafe;color:#1d4ed8}.onboarded{background:#dcfce7;color:#166534}.prospect{background:#fef3c7;color:#92400e}.standard{background:#f1f5f9;color:#334155}.sponsored{background:#fae8ff;color:#86198f}.not_connected{background:#fee2e2;color:#991b1b}.connected{background:#dcfce7;color:#166534}.pending,.new{background:#fef3c7;color:#92400e}.field{width:100%;border:1px solid #e2e8f0;border-radius:14px;padding:12px;font:inherit}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.small{font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap}.note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:14px}.tablehead{display:grid;grid-template-columns:1.4fr .8fr .8fr .8fr 1fr;gap:12px;color:#64748b;font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;padding:0 16px 8px}@media(max-width:900px){.cards,.grid2,.leadgrid{grid-template-columns:1fr 1fr}.supplier,.tablehead{grid-template-columns:1fr}.top,.leadtop{flex-direction:column;align-items:flex-start}}@media(max-width:600px){.cards,.leadgrid{grid-template-columns:1fr}.wrap{padding:20px}.title{font-size:34px}}
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="top">
-      <div>
-        <div class="eyebrow">Owner admin</div>
-        <h1 class="title">Supplier backend</h1>
-        <p class="muted">Manage listed suppliers, onboarding status, API/feed readiness and sponsored-listing opportunities.</p>
-      </div>
-      <div class="actions">
-        <a class="btn secondary" href="index.html">Back to product finder</a>
-        <button class="btn primary" onclick="exportSuppliers()">Export supplier CSV</button>
-      </div>
+      <div><div class="eyebrow">Owner admin</div><h1 class="title">Supplier backend</h1><p class="muted">Manage suppliers, quote leads, API/feed readiness and sponsored-listing opportunities.</p></div>
+      <div class="actions"><a class="btn secondary" href="index.html">Back to product finder</a><button class="btn primary" onclick="exportSuppliers()">Export supplier CSV</button></div>
     </section>
 
     <section class="cards">
@@ -27,50 +20,43 @@
       <div class="card"><strong id="apiReady">0</strong><span class="muted">API/feed ready</span></div>
       <div class="card"><strong id="sponsoredCount">0</strong><span class="muted">Sponsored suppliers</span></div>
       <div class="card"><strong id="prospectsCount">0</strong><span class="muted">Prospects/onboarding</span></div>
+      <div class="card"><strong id="leadCount">0</strong><span class="muted">Quote leads</span></div>
+    </section>
+
+    <section class="panel">
+      <div class="top" style="margin-bottom:10px"><div><h2>Recent quote enquiries</h2><p class="muted">Live leads pulled from the Google Sheets backend.</p></div><button class="btn primary" onclick="loadLeads()">Refresh leads</button></div>
+      <div class="grid2"><input id="leadSearch" class="field" placeholder="Search leads by name, company, email, product"><select id="leadStatusFilter" class="field"><option value="all">All lead statuses</option><option value="new">New</option><option value="quoted">Quoted</option><option value="closed">Closed</option></select></div>
+      <div id="leadList"><p class="muted">Loading leads...</p></div>
     </section>
 
     <section class="panel">
       <h2>Supplier controls</h2>
-      <p class="muted">This is the owner view. Suppliers marked as sponsored can later be prioritised in listings. API status tracks whether they can supply their own product/price/stock feed.</p>
-      <div class="grid2">
-        <input id="search" class="field" placeholder="Search suppliers">
-        <select id="statusFilter" class="field">
-          <option value="all">All statuses</option>
-          <option value="listed">Listed</option>
-          <option value="onboarded">Onboarded</option>
-          <option value="prospect">Prospect</option>
-        </select>
-      </div>
-      <div class="toolbar">
-        <button class="chip active" onclick="setCommercialFilter('all', this)">All</button>
-        <button class="chip" onclick="setCommercialFilter('standard', this)">Standard</button>
-        <button class="chip" onclick="setCommercialFilter('sponsored', this)">Sponsored</button>
-        <button class="chip" onclick="setCommercialFilter('paid_pending', this)">Paid pending</button>
-      </div>
+      <p class="muted">Suppliers marked as sponsored can later be prioritised in listings. API status tracks whether they can supply their own product/price/stock feed.</p>
+      <div class="grid2"><input id="search" class="field" placeholder="Search suppliers"><select id="statusFilter" class="field"><option value="all">All statuses</option><option value="listed">Listed</option><option value="onboarded">Onboarded</option><option value="prospect">Prospect</option></select></div>
+      <div class="toolbar"><button class="chip active" onclick="setCommercialFilter('all', this)">All</button><button class="chip" onclick="setCommercialFilter('standard', this)">Standard</button><button class="chip" onclick="setCommercialFilter('sponsored', this)">Sponsored</button><button class="chip" onclick="setCommercialFilter('paid_pending', this)">Paid pending</button></div>
       <div class="tablehead"><div>Supplier</div><div>Status</div><div>Commercial</div><div>API/feed</div><div>Actions</div></div>
       <div id="supplierList"></div>
     </section>
 
-    <section class="panel">
-      <h2>Supplier onboarding template</h2>
-      <div class="note">
-        <p><strong>Ask suppliers for:</strong></p>
-        <p class="muted small">Exact product-page URLs, stock feed, trade price feed, product identifiers, catalogue numbers, GTIN/EANs, image URLs, API documentation, update frequency, commercial terms and sponsored listing interest.</p>
-      </div>
-    </section>
+    <section class="panel"><h2>Supplier onboarding template</h2><div class="note"><p><strong>Ask suppliers for:</strong></p><p class="muted small">Exact product-page URLs, stock feed, trade price feed, product identifiers, catalogue numbers, GTIN/EANs, image URLs, API documentation, update frequency, commercial terms and sponsored listing interest.</p></div></section>
   </main>
 
 <script>
-let suppliers=[];let commercialFilter='all';
-const list=document.getElementById('supplierList');
-function badge(text, cls){return `<span class="badge ${cls||''}">${text.replaceAll('_',' ')}</span>`}
-function renderStats(){document.getElementById('totalSuppliers').textContent=suppliers.length;document.getElementById('apiReady').textContent=suppliers.filter(s=>s.apiStatus==='connected'||s.apiStatus==='pending').length;document.getElementById('sponsoredCount').textContent=suppliers.filter(s=>s.sponsored||s.commercialStatus==='sponsored').length;document.getElementById('prospectsCount').textContent=suppliers.filter(s=>s.status==='prospect'||s.status==='onboarded').length}
+let suppliers=[];let leads=[];let commercialFilter='all';
+const list=document.getElementById('supplierList');const leadList=document.getElementById('leadList');
+function badge(text, cls){return `<span class="badge ${cls||''}">${String(text||'new').replaceAll('_',' ')}</span>`}
+function safe(v){return String(v||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function parseProducts(json){try{const arr=JSON.parse(json||'[]');return Array.isArray(arr)?arr:[]}catch{return[]}}
+function renderStats(){document.getElementById('totalSuppliers').textContent=suppliers.length;document.getElementById('apiReady').textContent=suppliers.filter(s=>s.apiStatus==='connected'||s.apiStatus==='pending').length;document.getElementById('sponsoredCount').textContent=suppliers.filter(s=>s.sponsored||s.commercialStatus==='sponsored').length;document.getElementById('prospectsCount').textContent=suppliers.filter(s=>s.status==='prospect'||s.status==='onboarded').length;document.getElementById('leadCount').textContent=leads.length}
+function renderLeads(){const q=document.getElementById('leadSearch').value.toLowerCase();const status=document.getElementById('leadStatusFilter').value;const rows=leads.filter(l=>{const hay=Object.values(l).join(' ').toLowerCase();return(!q||hay.includes(q))&&(status==='all'||String(l.status||'new').toLowerCase()===status)});leadList.innerHTML=rows.map(l=>{const products=parseProducts(l.productsJson);const mail=l.email?`mailto:${l.email}?subject=${encodeURIComponent('TradeFind AI quote enquiry')}`:'#';return `<div class="lead"><div class="leadtop"><div><h3>${safe(l.company||l.name||'New enquiry')}</h3><div class="muted small">${safe(l.createdAt)}</div></div><div>${badge(l.status||'new','new')}</div></div><div class="leadgrid"><div class="leadfield"><small>Name</small>${safe(l.name)}</div><div class="leadfield"><small>Email</small>${safe(l.email)}</div><div class="leadfield"><small>Phone</small>${safe(l.phone)}</div><div class="leadfield"><small>Postcode</small>${safe(l.postcode)}</div><div class="leadfield"><small>Required by</small>${safe(l.requiredBy)}</div><div class="leadfield"><small>Company</small>${safe(l.company)}</div></div><div class="leadfield"><small>Message</small>${safe(l.message)}</div><div class="products"><strong>Products</strong>${products.length?products.map(p=>`<div class="muted small">${safe(p.code)} · ${safe(p.brand)} · ${safe(p.name)} · ${safe(p.price)}</div>`).join(''):'<div class="muted small">No products captured</div>'}</div><div class="actions" style="margin-top:12px"><a class="btn primary" href="${mail}">Email customer</a><button class="btn secondary" onclick='copyLead(${JSON.stringify(l).replace(/'/g,"&apos;")})'>Copy lead</button></div></div>`}).join('')||'<p class="muted">No leads match this filter.</p>';renderStats()}
+function copyLead(l){navigator.clipboard?.writeText(JSON.stringify(l,null,2));alert('Lead copied.')} 
+async function loadLeads(){leadList.innerHTML='<p class="muted">Loading leads...</p>';try{const res=await fetch('/api/admin-leads',{cache:'no-store'});const data=await res.json();if(!data.ok)throw new Error(data.error||'Could not load leads');leads=data.leads||[]}catch(e){leadList.innerHTML=`<p class="muted">Could not load leads: ${safe(e.message)}</p>`;return}renderLeads()}
 function render(){const q=document.getElementById('search').value.toLowerCase();const status=document.getElementById('statusFilter').value;const rows=suppliers.filter(s=>(!q||[s.name,s.website,s.notes,s.supplierType].join(' ').toLowerCase().includes(q))&&(status==='all'||s.status===status)&&(commercialFilter==='all'||s.commercialStatus===commercialFilter));list.innerHTML=rows.map(s=>`<div class="supplier"><div><h3>${s.name}</h3><div class="muted small">${s.website}</div><div class="muted small">${s.notes||''}</div></div><div>${badge(s.status,s.status)}</div><div>${badge(s.commercialStatus,s.commercialStatus)} ${s.sponsored?badge('sponsored','sponsored'):''}</div><div>${badge(s.apiStatus,s.apiStatus)}<div class="muted small">${(s.feedOptions||[]).join(', ')}</div></div><div class="actions"><a class="btn secondary" href="${s.website}" target="_blank" rel="noopener">Open site</a><button class="btn primary" onclick="copyOnboarding('${s.id}')">Copy API request</button></div></div>`).join('')||'<p class="muted">No suppliers match this filter.</p>';renderStats()}
 function setCommercialFilter(value, el){commercialFilter=value;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');render()}
 function copyOnboarding(id){const s=suppliers.find(x=>x.id===id);if(!s)return;const msg=`Hi ${s.name},\n\nWe are building TradeFind AI, an electrical product search and quote platform. We would like to discuss listing your products with exact product-page links and, where available, connecting an authorised product/price/stock feed or API.\n\nCould you confirm whether you can provide:\n- Exact product URLs\n- Product catalogue data\n- Price and stock feed\n- API documentation or CSV feed\n- Commercial terms for sponsored listings or quote leads\n\nThanks`;navigator.clipboard?.writeText(msg);alert('Supplier onboarding message copied.')}
 function exportSuppliers(){const header=['id','name','status','commercialStatus','supplierType','website','apiStatus','sponsored','priority','feedOptions','notes'];const rows=suppliers.map(s=>header.map(h=>`"${String(Array.isArray(s[h])?s[h].join('|'):s[h]??'').replaceAll('"','""')}"`).join(','));const blob=new Blob([header.join(',')+'\n'+rows.join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='tradefind-suppliers.csv';a.click()}
-document.getElementById('search').addEventListener('input',render);document.getElementById('statusFilter').addEventListener('change',render);
-async function init(){try{const res=await fetch('data/suppliers.json',{cache:'no-store'});suppliers=await res.json()}catch(e){suppliers=[]}render()}init();
+document.getElementById('search').addEventListener('input',render);document.getElementById('statusFilter').addEventListener('change',render);document.getElementById('leadSearch').addEventListener('input',renderLeads);document.getElementById('leadStatusFilter').addEventListener('change',renderLeads);
+async function init(){try{const res=await fetch('data/suppliers.json',{cache:'no-store'});suppliers=await res.json()}catch(e){suppliers=[]}render();loadLeads()}init();
 </script>
 </body>
 </html>
