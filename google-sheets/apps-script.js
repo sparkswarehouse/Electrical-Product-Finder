@@ -9,8 +9,8 @@ function jsonResponse(data) {
 function rowsToObjects(values) {
   if (!values || values.length < 2) return [];
   const headers = values[0];
-  return values.slice(1).filter(row => row.some(Boolean)).map(row => {
-    const item = {};
+  return values.slice(1).filter(row => row.some(Boolean)).map((row, rowIndex) => {
+    const item = { rowNumber: rowIndex + 2 };
     headers.forEach((header, index) => item[header] = row[index] || '');
     return item;
   });
@@ -63,6 +63,14 @@ function doPost(e) {
       ]);
 
       return jsonResponse({ ok: true, action: 'lead_saved' });
+    }
+
+    if (action === 'deleteLead') {
+      const sheet = spreadsheet.getSheetByName('Leads');
+      const rowNumber = Number(body.rowNumber);
+      if (!rowNumber || rowNumber < 2) return jsonResponse({ ok: false, error: 'Invalid rowNumber' });
+      sheet.deleteRow(rowNumber);
+      return jsonResponse({ ok: true, action: 'lead_deleted', rowNumber: rowNumber });
     }
 
     if (action === 'click') {
