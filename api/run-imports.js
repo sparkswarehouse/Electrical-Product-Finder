@@ -1,90 +1,77 @@
-import { exec } from 'node:child_process';
-import util from 'node:util';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-
-const run = util.promisify(exec);
-
-const IMPORTS = [
-  {
-    supplier: 'tlc-direct',
-    url: 'https://www.tlc-direct.co.uk/Main_Index/Wiring_Accessories/index.html'
-  },
-  {
-    supplier: 'toolstation',
-    url: 'https://www.toolstation.com/electrical/c370'
-  }
-];
+import { runImportPipeline, IMPORTS } from '../lib/import-engine.js';
 
 const PRODUCTS_FILE = path.join(process.cwd(), 'data', 'products.json');
 const HISTORY_FILE = path.join(process.cwd(), 'data', 'import-history.json');
 
-async function countProducts() {
+async function loadProducts() {
   try {
     const raw = await fs.readFile(PRODUCTS_FILE, 'utf8');
-    const products = JSON.parse(raw || '[]');
-    return Array.isArray(products) ? products.length : 0;
+    return JSON.parse(raw || '[]');
   } catch {
-    return 0;
+    return [];
   }
 }
 
-async function appendHistory(entry) {
-  let history = [];
+async function saveProducts(products) {
+  try {
+    await fs.writeFile(PRODUCTS_FILE, JSON.stringify(products, null, 2));
+  } catch {
+    // Ignore Vercel write limitations for now.
+  }
+}
 
+async function loadHistory() {
   try {
     const raw = await fs.readFile(HISTORY_FILE, 'utf8');
-    history = JSON.parse(raw || '[]');
+    return JSON.parse(raw || '[]');
   } catch {
-    history = [];
+    return [];
   }
+}
 
-  history.unshift(entry);
-  history = history.slice(0, 30);
-
-  await fs.writeFile(HISTORY_FILE, JSON.stringify(history, null, 2));
+async function saveHistory(history) {
+  try {
+    await fs.writeFile(HISTORY_FILE, JSON.stringify(history, null, 2));
+  } catch {
+    // Ignore Vercel write limitations for now.
+  }
 }
 
 export default async function handler(req, res) {
   try {
-    const logs = [];
-    const beforeCount = await countProducts();
+    const existingProducts = await loadProducts();
+    const beforeCount = existingProducts.length;
 
-    for (const job of IMPORTS) {
-      const cmd = `node import/importer.mjs --supplier=${job.supplier} --url=${job.url}`;
-      logs.push(`Running: ${cmd}`);
+    const result = await runImportPipeline(existingProducts);
 
-      const { stdout, stderr } = await run(cmd);
+    const mergedProducts = result.mergedProducts || existingProducts;
+    const afterCount = mergedProducts.length;
 
-      if (stdout) logs.push(stdout);
-      if (stderr) logs.push(stderr);
-    }
-
-    const merge = await run('node import/merge-imports.mjs');
-
-    logs.push(merge.stdout || 'Merge completed');
-
-    const afterCount = await countProducts();
-    const imported = Math.max(afterCount - beforeCount, 0);
+    await saveProducts(mergedProducts);
 
     const historyEntry = {
       date: new Date().toISOString(),
       beforeCount,
       afterCount,
-      imported,
+      imported: result.importedCount || 0,
       suppliersRun: IMPORTS.length
     };
 
-    await appendHistory(historyEntry);
+    const history = await loadHistory();
+    history.unshift(historyEntry);
+
+    await saveHistory(history.slice(0, 30));
 
     return res.status(200).json({
       ok: true,
       importsRun: IMPORTS.length,
       beforeCount,
       afterCount,
-      imported,
+      imported: result.importedCount || 0,
       historyEntry,
-      logs
+      logs: result.logs || []
     });
   } catch (error) {
     return res.status(500).json({
