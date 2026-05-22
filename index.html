@@ -1,37 +1,104 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TradeFind AI | Electrical Product Finder</title>
-  <style>
-    *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f8fafc;color:#0f172a}.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.side{background:#0f172a;color:#fff;padding:28px;position:sticky;top:0;height:100vh;overflow:auto}.logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}.mark{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#2563eb,#38bdf8);display:grid;place-items:center;font-weight:900}.brandname{font-size:22px;font-weight:900}.tagline{font-size:13px;color:#94a3b8}.side h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#64748b;margin:28px 0 10px}.filter{display:flex;justify-content:space-between;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);margin:7px 0;color:#cbd5e1;cursor:pointer}.filter.active{background:#1e293b;color:#fff;border-color:#38bdf8}.main{padding:30px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:20px}.pill{background:#fff;border:1px solid #e2e8f0;padding:10px 14px;border-radius:999px;color:#475569}.hero{background:radial-gradient(circle at top right,#2563eb 0,#0f172a 45%,#020617 100%);border-radius:30px;color:#fff;padding:36px;box-shadow:0 24px 70px rgba(15,23,42,.22)}.hero h1{font-size:44px;line-height:1.05;margin:10px 0;letter-spacing:-1.4px}.hero p{color:#cbd5e1;font-size:18px;max-width:820px;line-height:1.5}.search{display:flex;gap:10px;background:#fff;border-radius:18px;padding:10px;max-width:850px;margin-top:22px}.search input{flex:1;border:0;outline:0;padding:16px;border-radius:12px;font-size:16px}.btn{border:0;border-radius:13px;padding:13px 18px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}.primary{background:#38bdf8;color:#082f49}.dark{background:#0f172a;color:white}.secondary{background:#eef2ff;color:#1e3a8a}.danger{background:#fee2e2;color:#991b1b}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.metric{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:16px}.metric strong{font-size:26px;display:block}.layout{display:grid;grid-template-columns:1fr 350px;gap:22px}.panel,.card{background:#fff;border:1px solid #e2e8f0;border-radius:24px;box-shadow:0 14px 40px rgba(15,23,42,.06)}.panel{padding:22px}.panelhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:16px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{overflow:hidden}.imgbox{height:180px;background:linear-gradient(135deg,#f8fafc,#dbeafe);display:grid;place-items:center;border-bottom:1px solid #e2e8f0}.imgbox img,.detailImg img{max-width:100%;max-height:100%;object-fit:contain}.fallbackIcon{width:110px;height:110px}.content{padding:18px}.brand{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#2563eb;font-weight:900}.content h3{margin:8px 0;font-size:19px}.muted{color:#64748b;line-height:1.45}.tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tag{font-size:12px;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:7px 9px}.price{font-size:24px;font-weight:900}.actions{display:flex;gap:10px;margin-top:14px}.actions>*{flex:1}@media(max-width:1050px){.app{grid-template-columns:1fr}.side{height:auto;position:relative}.layout{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}}@media(max-width:680px){.main{padding:18px}.hero h1{font-size:34px}.search,.top,.panelhead{flex-direction:column;align-items:stretch}.metrics{grid-template-columns:1fr}}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TradeFind AI | Alternative Finder</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f8fafc;color:#0f172a}.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.side{background:#0f172a;color:#fff;padding:28px}.main{padding:28px}.hero{background:linear-gradient(135deg,#0f172a,#2563eb);padding:34px;border-radius:28px;color:#fff}.hero h1{font-size:44px;margin:0 0 12px}.search{display:flex;gap:10px;background:#fff;padding:10px;border-radius:18px;margin-top:20px}.search input{flex:1;border:0;font-size:16px;padding:14px}.btn{border:0;border-radius:14px;padding:14px 18px;font-weight:900;cursor:pointer}.primary{background:#38bdf8}.secondary{background:#eef2ff;color:#1e3a8a}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:20px}.card{background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:20px;box-shadow:0 14px 40px rgba(15,23,42,.06)}.brand{font-size:12px;font-weight:900;color:#2563eb;text-transform:uppercase}.tag{display:inline-block;padding:6px 8px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:11px;margin:4px}.alt{margin-top:14px;padding-top:14px;border-top:1px solid #e2e8f0}.altRow{padding:10px;background:#f8fafc;border-radius:14px;margin-top:8px}.confidence{font-weight:900;color:#16a34a}.muted{color:#64748b}.metricRow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.metric{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:16px}.metric strong{display:block;font-size:24px}.actions{display:flex;gap:10px;margin-top:14px}.actions>*{flex:1}.modal{position:fixed;inset:0;background:rgba(2,6,23,.65);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.modal.open{display:flex}.dialog{background:#fff;border-radius:28px;max-width:1000px;width:100%;max-height:90vh;overflow:auto;padding:28px}.supplier{padding:14px;border:1px solid #e2e8f0;border-radius:16px;margin-top:10px;background:#f8fafc}@media(max-width:900px){.app{grid-template-columns:1fr}.grid,.metricRow{grid-template-columns:1fr}.hero h1{font-size:34px}}</style>
 </head>
 <body>
 <div class="app">
-  <aside class="side">
-    <div class="logo"><div class="mark">TF</div><div><div class="brandname">TradeFind AI</div><div class="tagline">Electrical product intelligence</div></div></div>
-    <h4>Categories</h4><div id="catFilters"></div>
-    <h4>Brands</h4><div id="brandFilters"></div>
-    <button class="btn danger" style="width:100%;margin-top:18px" onclick="clearFilters()">Clear filters</button>
-    <a class="btn secondary" style="width:100%;margin-top:12px" href="admin.html">Owner admin</a>
-  </aside>
-  <main class="main">
-    <div class="top"><div class="muted">Dashboard / Product search</div><div class="pill">Alternative intelligence engine active</div></div>
-    <section class="hero"><div class="brand" style="color:#7dd3fc">TradeFind AI</div><h1>Find electrical products and suitable alternatives instantly.</h1><p>Search by product code, finish, wattage, range or description to discover exact replacements, premium alternatives and supplier availability.</p><div class="search"><input id="q" placeholder="Try: obsolete ballast, black socket, IP66 outdoor socket"><button class="btn primary" onclick="render()">Search</button></div></section>
-    <section class="metrics"><div class="metric"><strong id="productCount">0</strong><span class="muted">Products</span></div><div class="metric"><strong id="categoryCount">0</strong><span class="muted">Categories</span></div><div class="metric"><strong id="brandCount">0</strong><span class="muted">Brands</span></div><div class="metric"><strong id="alternativeReady">0</strong><span class="muted">Alternative-ready</span></div></section>
-    <section class="layout"><div class="panel"><div class="panelhead"><div><h2 id="title">Product matches</h2><p id="status" class="muted">Loading products...</p></div></div><div id="results" class="grid"></div></div><aside><div class="panel"><h2>Alternative Intelligence</h2><p class="muted">Products are now enriched with structured attributes to power future AI replacement matching.</p></div></aside></section>
-  </main>
+<aside class="side">
+<h2>TradeFind AI</h2>
+<p>Electrical replacement intelligence platform.</p>
+</aside>
+<main class="main">
+<section class="hero">
+<div class="brand" style="color:#7dd3fc">Alternative Intelligence Engine</div>
+<h1>Find the best electrical product alternatives instantly.</h1>
+<p>AI-powered matching for replacements, upgrades and compatible alternatives.</p>
+<div class="search"><input id="q" placeholder="Search by code, description, finish, IP rating"><button class="btn primary" onclick="render()">Search</button></div>
+</section>
+<section class="metricRow">
+<div class="metric"><strong id="productCount">0</strong><span class="muted">Products</span></div>
+<div class="metric"><strong id="altCount">0</strong><span class="muted">Alternative relationships</span></div>
+<div class="metric"><strong id="obsoleteCount">0</strong><span class="muted">Obsolete-ready</span></div>
+<div class="metric"><strong>AI Ready</strong><span class="muted">Structured product data</span></div>
+</section>
+<div id="results" class="grid"></div>
+</main>
 </div>
+
+<div id="productModal" class="modal">
+<div class="dialog">
+<div style="display:flex;justify-content:space-between;gap:20px;align-items:flex-start">
+<div>
+<div id="modalBrand" class="brand"></div>
+<h2 id="modalName"></h2>
+<p id="modalDesc" class="muted"></p>
+</div>
+<button class="btn secondary" onclick="closeModal()">Close</button>
+</div>
+
+<div id="modalTags"></div>
+
+<h3>Supplier availability</h3>
+<div id="modalSuppliers"></div>
+
+<h3 style="margin-top:24px">Best alternatives</h3>
+<div id="modalAlternatives"></div>
+</div>
+</div>
+
 <script>
-let products=[];const fallback=[{brand:'MK Electric',name:'Logic Plus 13A Double Switched Socket',category:'Wiring Devices',code:'K2747WHI',price:'£4.22',tags:['13A','White','Switched'],description:'High-volume white moulded twin switched socket.'}];
-function enrichProduct(p){const text=`${p.brand||''} ${p.name||''} ${p.description||''}`.toLowerCase();return {...p,attributes:{finish:/black/.test(text)?'Black':/white/.test(text)?'White':'',ipRating:(text.match(/ip\s?(\d{2})/i)||[])[1]||'',voltage:(text.match(/(110v|230v|240v|250v)/i)||[])[1]||'',led:/\bled\b/.test(text),dimmable:/dimmable/.test(text),emergency:/emergency/.test(text),obsolete:/obsolete|discontinued/.test(text)}}}
-function safe(s){return String(s??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function searchable(p){return [p.brand,p.name,p.category,p.code,p.description,...Object.values(p.attributes||{})].join(' ').toLowerCase()}
-function render(){const q=document.getElementById('q').value.toLowerCase();const filtered=products.filter(p=>!q||searchable(p).includes(q));results.innerHTML=filtered.map(p=>`<article class='card'><div class='content'><div class='brand'>${safe(p.brand)}</div><h3>${safe(p.name)}</h3><p class='muted'>${safe(p.category)}</p><p><strong>Code:</strong> ${safe(p.code)}</p><div class='tags'>${Object.entries(p.attributes||{}).filter(([k,v])=>v).slice(0,5).map(([k,v])=>`<span class='tag'>${safe(v)}</span>`).join('')}</div><div class='price'>${safe(p.price||'')}</div></div></article>`).join('');status.textContent=`Showing ${filtered.length} product match(es).`}
-(async function init(){try{products=await (await fetch('data/products.json',{cache:'no-store'})).json()}catch{products=fallback}products=products.map(enrichProduct);productCount.textContent=products.length;categoryCount.textContent=new Set(products.map(p=>p.category)).size;brandCount.textContent=new Set(products.map(p=>p.brand)).size;alternativeReady.textContent=products.filter(p=>p.attributes).length;render()})();
-q.addEventListener('input',render)
+let products=[];
+const fallback=[{brand:'MK Electric',name:'Logic Plus 13A Double Socket',category:'Sockets',code:'K2747WHI',price:'£4.22',description:'White 13A switched double socket',attributes:{finish:'White',voltage:'250V'},suppliers:[{supplier:'CEF',price:'£4.22',stock:'124 in stock',url:'https://www.cef.co.uk/'},{supplier:'TLC Direct',price:'£4.11',stock:'62 in stock',url:'https://www.tlc-direct.co.uk/'}]},{brand:'BG',name:'Nexus Double Switched Socket',category:'Sockets',code:'BG822',price:'£3.91',description:'White moulded switched socket',attributes:{finish:'White',voltage:'250V'},suppliers:[{supplier:'Toolstation',price:'£3.91',stock:'210 in stock',url:'https://www.toolstation.com/'}]},{brand:'Click',name:'Deco Black Nickel Socket',category:'Sockets',code:'VPBN520BK',price:'£9.44',description:'Black nickel screwless socket',attributes:{finish:'Black Nickel',voltage:'250V'},suppliers:[{supplier:'Screwfix',price:'£9.44',stock:'18 in stock',url:'https://www.screwfix.com/'}]}];
+
+function safe(v){return String(v??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function searchable(p){return [p.brand,p.name,p.code,p.description,...Object.values(p.attributes||{})].join(' ').toLowerCase()}
+
+function similarity(a,b){let score=0;const at=a.attributes||{};const bt=b.attributes||{};if(a.category===b.category)score+=35;if(at.finish&&at.finish===bt.finish)score+=12;if(at.voltage&&at.voltage===bt.voltage)score+=10;const aWords=(a.name||'').toLowerCase().split(/\W+/);const bWords=(b.name||'').toLowerCase().split(/\W+/);const overlap=aWords.filter(w=>bWords.includes(w)&&w.length>3);score+=Math.min(20,overlap.length*5);return score}
+
+function alternatives(product){return products.filter(p=>p.code!==product.code).map(p=>({...p,confidence:Math.min(99,similarity(product,p))})).filter(p=>p.confidence>25).sort((a,b)=>b.confidence-a.confidence).slice(0,4)}
+
+function openProduct(index){
+const p=products[index];
+modalBrand.textContent=p.brand||'';
+modalName.textContent=p.name||'';
+modalDesc.textContent=p.description||'';
+modalTags.innerHTML=Object.values(p.attributes||{}).filter(Boolean).map(v=>`<span class='tag'>${safe(v)}</span>`).join('');
+
+const suppliers=p.suppliers||[{supplier:'Google supplier search',price:p.price||'Check supplier',stock:'Unknown',url:'https://google.com/search?q='+encodeURIComponent(p.code||p.name)}];
+modalSuppliers.innerHTML=suppliers.map(s=>`<div class='supplier'><strong>${safe(s.supplier)}</strong><br><span>${safe(s.price||'')}</span><br><span class='muted'>${safe(s.stock||'')}</span><br><a href='${safe(s.url||'#')}' target='_blank'>View supplier</a></div>`).join('');
+
+const alts=alternatives(p);
+modalAlternatives.innerHTML=alts.length?alts.map(a=>`<div class='altRow'><strong>${safe(a.brand)} ${safe(a.name)}</strong><br><span class='confidence'>${a.confidence}% match</span><br><span class='muted'>${safe(a.code)}</span></div>`).join(''):'<div class="muted">No alternatives found.</div>';
+
+productModal.classList.add('open');
+}
+
+function closeModal(){productModal.classList.remove('open')}
+
+function render(){
+const q=document.getElementById('q').value.toLowerCase();
+const filtered=products.filter(p=>!q||searchable(p).includes(q));
+results.innerHTML=filtered.map((p,index)=>{
+const alts=alternatives(p);
+return `<div class='card'><div class='brand'>${safe(p.brand)}</div><h2>${safe(p.name)}</h2><p class='muted'>${safe(p.category)}</p><p><strong>${safe(p.code)}</strong></p><div>${Object.values(p.attributes||{}).filter(Boolean).map(v=>`<span class='tag'>${safe(v)}</span>`).join('')}</div><div class='alt'><strong>${alts.length} alternative matches</strong></div><div class='actions'><button class='btn secondary' onclick='openProduct(${index})'>View details</button></div></div>`}).join('');
+document.getElementById('altCount').textContent=filtered.reduce((n,p)=>n+alternatives(p).length,0)
+}
+
+(async function init(){
+try{products=await (await fetch('data/products.json',{cache:'no-store'})).json()}catch{products=fallback}
+products=products.map(p=>({...p,attributes:p.attributes||{}}));
+document.getElementById('productCount').textContent=products.length;
+document.getElementById('obsoleteCount').textContent=products.filter(p=>p.attributes?.obsolete).length;
+render()
+})();
+
+document.getElementById('q').addEventListener('input',render)
+productModal.addEventListener('click',e=>{if(e.target.id==='productModal')closeModal()})
 </script>
 </body>
 </html>
