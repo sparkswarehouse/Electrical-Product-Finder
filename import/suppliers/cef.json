@@ -1,0 +1,15 @@
+{
+  "supplier": "CEF",
+  "website": "https://www.cef.co.uk/",
+  "importMethod": "scrape_or_feed",
+  "status": "planned",
+  "priority": 95,
+  "categories": [
+    "Industrial",
+    "Lighting",
+    "Wiring Accessories",
+    "Cable Management",
+    "Control Gear"
+  ],
+  "notes": "Potential future sponsored supplier and API partner."
+}
