@@ -1,0 +1,15 @@
+{
+  "supplier": "TLC Direct",
+  "website": "https://www.tlc-direct.co.uk/",
+  "importMethod": "scrape",
+  "status": "planned",
+  "priority": 100,
+  "categories": [
+    "Wiring Accessories",
+    "Lighting",
+    "Cable",
+    "Ventilation",
+    "Consumer Units"
+  ],
+  "notes": "Initial target supplier for first large-scale import rollout."
+}
