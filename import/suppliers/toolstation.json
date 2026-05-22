@@ -1,0 +1,15 @@
+{
+  "supplier": "Toolstation",
+  "website": "https://www.toolstation.com/",
+  "importMethod": "scrape",
+  "status": "planned",
+  "priority": 90,
+  "categories": [
+    "Sockets",
+    "Switches",
+    "Lighting",
+    "Security",
+    "Heating"
+  ],
+  "notes": "Strong consumer/trade overlap supplier for broad catalogue coverage."
+}
