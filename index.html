@@ -1,1 +1,98 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>TradeFind AI | Electrical Product Finder</title><style>*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f8fafc;color:#0f172a}.productImage{width:100%;height:180px;object-fit:contain;background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:12px;margin-bottom:14px}.thumb{width:52px;height:52px;object-fit:contain;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:4px}.modalHero{width:160px;height:160px;object-fit:contain;background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:10px;margin-bottom:14px}</style><script>window.PLACEHOLDER_IMAGES={default:'https://placehold.co/600x600/f8fafc/94a3b8?text=Electrical+Product',Sockets:'https://placehold.co/600x600/f8fafc/2563eb?text=Socket',Switches:'https://placehold.co/600x600/f8fafc/0f172a?text=Switch',Lighting:'https://placehold.co/600x600/f8fafc/f59e0b?text=Lighting','Control Gear':'https://placehold.co/600x600/f8fafc/16a34a?text=Control+Gear'};window.productImage=function(product){return product.image||window.PLACEHOLDER_IMAGES[product.category]||window.PLACEHOLDER_IMAGES.default};</script></head><body><script>document.addEventListener('DOMContentLoaded',()=>{const originalRender=window.render;if(originalRender){window.render=function(){originalRender();document.querySelectorAll('.card').forEach((card,index)=>{if(card.querySelector('.productImage'))return;const p=(window.products||[])[index];if(!p)return;const img=document.createElement('img');img.className='productImage';img.src=window.productImage(p);img.alt=p.name||'Product';card.prepend(img);});};}const originalOpen=window.openProduct;if(originalOpen){window.openProduct=function(i){originalOpen(i);const p=(window.products||[])[i];if(!p)return;const titleWrap=document.querySelector('#productModal h2')?.parentElement;if(titleWrap&&!titleWrap.querySelector('.modalHero')){const img=document.createElement('img');img.className='modalHero';img.src=window.productImage(p);img.alt=p.name||'Product';titleWrap.prepend(img);}document.querySelectorAll('.altTable tbody tr').forEach((row,rowIndex)=>{const first=row.querySelector('td');if(!first||first.querySelector('.thumb'))return;const alt=(window.alternatives&&window.alternatives(p)[rowIndex])||null;if(!alt)return;first.innerHTML=`<div style='display:flex;gap:10px;align-items:center'><img class='thumb' src='${window.productImage(alt)}' alt='${alt.name}'><div>${first.innerHTML}</div></div>`;});};}});</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TradeFind AI</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f8fafc;color:#0f172a}
+.header{background:#0f172a;color:#fff;padding:24px}
+.search{margin-top:16px;display:flex;gap:10px}
+.search input{flex:1;padding:14px;border-radius:12px;border:1px solid #cbd5e1}
+.search button{padding:14px 18px;border:0;border-radius:12px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;padding:24px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:18px;box-shadow:0 8px 24px rgba(15,23,42,.08)}
+.productImage{width:100%;height:180px;object-fit:contain;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:12px;margin-bottom:14px}
+.brand{font-size:12px;font-weight:bold;color:#2563eb;text-transform:uppercase}
+.code{font-weight:bold;margin-top:6px}
+.tags{margin-top:10px}
+.tag{display:inline-block;background:#eff6ff;color:#1d4ed8;padding:6px 8px;border-radius:999px;font-size:11px;margin:3px}
+.actions{display:flex;gap:10px;margin-top:16px}
+.actions button{flex:1;padding:12px;border-radius:12px;border:0;font-weight:bold;cursor:pointer}
+.primary{background:#2563eb;color:#fff}
+.secondary{background:#e2e8f0}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>TradeFind AI</h1>
+<p>Electrical replacement intelligence platform</p>
+<div class="search">
+<input id="search" placeholder="Search products, codes, finishes, IP ratings">
+<button onclick="renderProducts()">Search</button>
+</div>
+</div>
+<div id="products" class="grid"></div>
+<script>
+const PLACEHOLDER_IMAGES={
+ default:'https://placehold.co/600x600/f8fafc/94a3b8?text=Electrical+Product',
+ Sockets:'https://placehold.co/600x600/f8fafc/2563eb?text=Socket',
+ Switches:'https://placehold.co/600x600/f8fafc/0f172a?text=Switch',
+ Lighting:'https://placehold.co/600x600/f8fafc/f59e0b?text=Lighting',
+ 'Control Gear':'https://placehold.co/600x600/f8fafc/16a34a?text=Control+Gear'
+};
+
+const products=[
+{
+ brand:'MK Electric',
+ name:'Logic Plus Double Socket',
+ category:'Sockets',
+ code:'K2747WHI',
+ image:'',
+ attributes:{finish:'White',voltage:'250V'}
+},
+{
+ brand:'BG',
+ name:'Nexus Double Socket',
+ category:'Sockets',
+ code:'BG822',
+ image:'',
+ attributes:{finish:'White',voltage:'250V'}
+},
+{
+ brand:'Click',
+ name:'Deco Black Nickel Socket',
+ category:'Sockets',
+ code:'VPBN520BK',
+ image:'',
+ attributes:{finish:'Black Nickel',voltage:'250V'}
+}
+];
+
+function getImage(product){
+ return product.image || PLACEHOLDER_IMAGES[product.category] || PLACEHOLDER_IMAGES.default;
+}
+
+function renderProducts(){
+ const q=document.getElementById('search').value.toLowerCase();
+ const filtered=products.filter(p=>JSON.stringify(p).toLowerCase().includes(q));
+ document.getElementById('products').innerHTML=filtered.map(p=>`
+ <div class='card'>
+ <img class='productImage' src='${getImage(p)}' alt='${p.name}'>
+ <div class='brand'>${p.brand}</div>
+ <h2>${p.name}</h2>
+ <div class='code'>${p.code}</div>
+ <div class='tags'>
+ ${Object.values(p.attributes||{}).map(v=>`<span class='tag'>${v}</span>`).join('')}
+ </div>
+ <div class='actions'>
+ <button class='secondary'>View Details</button>
+ <button class='primary'>Find Alternatives</button>
+ </div>
+ </div>
+ `).join('');
+}
+renderProducts();
+</script>
+</body>
+</html>
